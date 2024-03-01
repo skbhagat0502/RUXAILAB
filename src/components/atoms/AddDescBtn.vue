@@ -78,7 +78,7 @@
 <script>
 import TextBox from '@/components/atoms/TextBox'
 import i18n from '@/i18n'
-
+import Vue from 'vue'
 export default {
   components: {
     TextBox,
@@ -101,11 +101,11 @@ export default {
   }),
   computed: {
     testAnswerDocLength() {
-            if(!this.$store.getters.testAnswerDocument) {
+      if (!this.$store.getters.testAnswerDocument) {
         return 0
       }
-      const heuristicAnswers = this.$store.getters.testAnswerDocument
-        .heuristicAnswers
+      const heuristicAnswers =
+        this.$store.getters.testAnswerDocument.heuristicAnswers
       const heuristicAnswersCount = Object.keys(heuristicAnswers).length
 
       return heuristicAnswersCount
@@ -127,7 +127,7 @@ export default {
         this.reset()
         this.$emit('change')
       } else if (valid && this.desc.text.length == 0) {
-        alert(i18n.t('alerts.addDescription'))
+        Vue.$toast.warning(i18n.t('alerts.addDescription'))
       }
     },
     reset() {

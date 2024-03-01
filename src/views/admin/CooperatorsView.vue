@@ -262,6 +262,7 @@ import LeaveAlert from '../../components/atoms/LeaveAlert.vue'
 import { cooperatorsHeaders } from '@/utils/headers'
 import { roleOptionsItems } from '@/utils/items'
 import Notification from '@/models/Notification'
+import Vue from 'vue'
 const UIDGenerator = require('uid-generator')
 export default {
   components: {
@@ -398,7 +399,7 @@ export default {
         }
         this.$store.dispatch('addNotification', {
           userId: guest.userDocId,
-          notification: new Notification({  
+          notification: new Notification({
             title: `${messageTitle}`,
             description: `${messageContent}`,
             redirectsTo: '/',
@@ -454,7 +455,7 @@ export default {
         //if is object then no need to validate
         if (this.email.length) {
           if (!this.email.includes('@') || !this.email.includes('.')) {
-            alert(this.email + ' is not a valid email')
+            Vue.$toast.error(this.email + ' is not a valid email')
           } else if (!this.selectedCoops.includes(this.email)) {
             this.selectedCoops.push(this.email)
           }
